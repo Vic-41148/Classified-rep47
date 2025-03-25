@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Results</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Simple table styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid white;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Physical Test Results</h2>
+    <div id="resultsTable">Loading results...</div>
+    <button onclick="location.href='index.html'">Go to Form</button>
+  </div>
+
+  <script>
+    // Fetch the markdown file and convert it into an HTML table
+    fetch("http://127.0.0.1:3000/data.md")
+      .then(response => response.text())
+      .then(md => {
+        // Split markdown file into lines and ignore header lines if present
+        const lines = md.trim().split("\n");
+        let tableHTML = "<table><tr><th>State</th><th>State Code</th><th>Category</th><th>Height</th><th>Chest</th><th>Result</th></tr>";
+        // Assume entries start after a header row (if any) or process all lines that start with "|"
+        lines.forEach(line => {
+          if(line.startsWith("|") && !line.includes("---")) {
+            // Remove leading and trailing pipe and split by pipe
+            let cols = line.replace(/^\|/, "").replace(/\|$/, "").split("|").map(col => col.trim());
+            tableHTML += "<tr>";
+            cols.forEach(col => {
+              tableHTML += `<td>${col}</td>`;
+            });
+            tableHTML += "</tr>";
+          }
+        });
+        tableHTML += "</table>";
+        document.getElementById("resultsTable").innerHTML = tableHTML;
+      })
+      .catch(error => {
+        document.getElementById("resultsTable").innerText = "No data found.";
+        console.error("Error loading results:", error);
+      });
+  </script>
+</body>
+</html>
