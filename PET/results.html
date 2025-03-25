@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPF PET Results</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>CAPF PET Results</h1>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Roll Number</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Chest Number</th>
+                <th>Starting Time</th>
+                <th>Finishing Time</th>
+                <th>Time Taken (sec)</th>
+                <th>Reason for Disqualification</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="resultsTable">
+        </tbody>
+    </table>
+    
+    <a href="index.html">Go Back</a>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let candidates = JSON.parse(localStorage.getItem("candidates")) || [];
+            let table = document.getElementById("resultsTable");
+            
+            candidates.forEach(candidate => {
+                let row = table.insertRow();
+                row.insertCell(0).innerText = candidate.sno;
+                row.insertCell(1).innerText = candidate.roll;
+                row.insertCell(2).innerText = candidate.name;
+                row.insertCell(3).innerText = candidate.gender;
+                row.insertCell(4).innerText = candidate.chest;
+                row.insertCell(5).innerText = candidate.startTime;
+                row.insertCell(6).innerText = candidate.finishTime;
+                row.insertCell(7).innerText = candidate.timeTaken;
+                row.insertCell(8).innerText = candidate.reason || "N/A";
+                
+                let statusCell = row.insertCell(9);
+                statusCell.innerText = candidate.pass ? "Pass" : "Fail";
+                statusCell.style.color = candidate.pass ? "green" : "red";
+            });
+        });
+    </script>
+</body>
+</html>

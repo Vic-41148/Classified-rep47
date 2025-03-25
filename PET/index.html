@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPF PET Recruitment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Central Armed Police Force - PET Form</h1>
+    
+    <form id="petForm">
+        <label for="sno">S.No:</label>
+        <input type="number" id="sno" required>
+        
+        <label for="roll">Roll Number:</label>
+        <input type="text" id="roll" required>
+        
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        
+        <label for="gender">Gender:</label>
+        <select id="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+        
+        <label for="chest">Chest Number:</label>
+        <input type="text" id="chest" required>
+        
+        <label for="startTime">Starting Time:</label>
+        <input type="time" id="startTime" required>
+        
+        <label for="finishTime">Finishing Time:</label>
+        <input type="time" id="finishTime" required>
+        
+        <label for="timeTaken">Time Taken (sec):</label>
+        <input type="number" id="timeTaken" required>
+        
+        <label for="reason">Reason for Disqualification (if any):</label>
+        <input type="text" id="reason">
+        
+        <label for="pass">Pass:</label>
+        <input type="checkbox" id="pass">
+        
+        <button type="submit">Submit</button>
+    </form>
+    
+    <a href="results.html">View Results</a>
+    
+    <script src="script.js"></script>
+</body>
+</html>
